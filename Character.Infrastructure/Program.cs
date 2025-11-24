@@ -42,6 +42,7 @@ namespace Character.Infrastructure
                 Console.WriteLine($"Found by ID: {foundWarrior.Name}");
             }
 
+                // 7. Тестируем удаление (Delete)
                 // await warriorService.RemoveAsync(newWarrior);
                 // Console.WriteLine("\nWarrior deleted.");
 

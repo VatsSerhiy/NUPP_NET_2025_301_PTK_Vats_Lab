@@ -1,5 +1,6 @@
 ﻿using Character.Infrastructure;
 using Character.REST.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using DbWarrior = Character.Infrastructure.Models.Warrior;
@@ -19,6 +20,7 @@ namespace Character.REST.Controllers
             _warriorService = warriorService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Models.Warrior>>> GetAll()
         {
@@ -40,7 +42,7 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Models.Warrior>> GetById(Guid id)
         {
@@ -63,6 +65,7 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] WarriorRequest request)
         {
@@ -93,6 +96,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not create warrior");
         }
 
+        [Authorize(Roles = "Moderator, Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] WarriorRequest request)
         {
@@ -112,6 +116,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not update warrior");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
