@@ -16,10 +16,23 @@ namespace Character.Infrastructure
         public DbSet<WeaponModel> Weapons { get; set; }
         public DbSet<Quests> Quests { get; set; }
 
+        public CharacterContext()
+        {
+        }
+
+        public CharacterContext(DbContextOptions<CharacterContext> options) : base(options)
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source = characters.db");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite("Data Source = characters.db");
+            }
         }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

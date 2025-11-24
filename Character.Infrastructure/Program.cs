@@ -10,40 +10,40 @@ namespace Character.Infrastructure
             
             context.Database.EnsureCreated(); 
 
-            var mageRepository = new CharacterRepository<Mage>(context);
-            var mageService = new CrudServiceAsync<Mage>(mageRepository);
+            var warriorRepository = new CharacterRepository<Warrior>(context);
+            var warriorService = new CrudServiceAsync<Warrior>(warriorRepository);
 
 
-            var newMage = new Mage
+            var newWarrior = new Warrior
             {
                 Id = Guid.NewGuid(),
-                Name = "Harry",
-                Level = 16,
-                Luck = 100
+                Name = "Conan",
+                Level = 12,
+                Luck = 50
             };
 
-            Console.WriteLine($"Creating mage: {newMage.Name}...");
-            await mageService.CreateAsync(newMage);
+            Console.WriteLine($"Creating warrior: {newWarrior.Name}...");
+            await warriorService.CreateAsync(newWarrior);
 
-            Console.WriteLine("\nList of Mage in DB:");
-            var mage = await mageService.ReadAllAsync();
-            foreach (var w in mage)
+            Console.WriteLine("\nList of Warriors in DB:");
+            var warriors = await warriorService.ReadAllAsync();
+            foreach (var w in warriors)
             {
                 Console.WriteLine($"- {w.Name} (Damage: {w.Level})");
             }
 
-            newMage.Name = "Harry Potter";
-            await mageService.UpdateAsync(newMage);
-            Console.WriteLine($"\nUpdated name to: {newMage.Name}");
+            newWarrior.Name = "Conan the King";
+            await warriorService.UpdateAsync(newWarrior);
+            Console.WriteLine($"\nUpdated name to: {newWarrior.Name}");
 
-            var foundMage = await mageService.ReadAsync(newMage.Id);
-            if (foundMage != null)
+            var foundWarrior = await warriorService.ReadAsync(newWarrior.Id);
+            if (foundWarrior != null)
             {
-                Console.WriteLine($"Found by ID: {foundMage.Name}");
+                Console.WriteLine($"Found by ID: {foundWarrior.Name}");
             }
 
-                // await mageService.RemoveAsync(newMage);
-                // Console.WriteLine("\nMage deleted.");
+                // await warriorService.RemoveAsync(newWarrior);
+                // Console.WriteLine("\nWarrior deleted.");
 
             Console.ReadKey();
         }

@@ -21,14 +21,6 @@ namespace Character.Infrastructure.Models
             Console.WriteLine("Quest system starting");
         }
 
-        //public Quests(string name, string desc)
-        //{
-        //    QuestName = name;
-        //    QuestDescription = desc;
-        //    Id = Guid.NewGuid();
-        //    counterQuest++;
-        //}
-
         public static int GetTotalQuests()
         {
             return counterQuest;

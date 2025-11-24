@@ -10,11 +10,5 @@ namespace Character.Infrastructure.Models
     {
         public List<WeaponModel> Weapons { get; set; } = new List<WeaponModel>();
 
-        //public Warrior(string name, float moveSpeed) : base(name, 100, 1)
-        //{
-        //    MoveSpeed = moveSpeed;
-        //}
-
-
     }
 }

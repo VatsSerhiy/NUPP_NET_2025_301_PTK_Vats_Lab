@@ -1,21 +1,12 @@
-﻿using Characters.Common;
-using System;
-
-namespace Character.Infrastructure.Models
+﻿namespace Character.REST.Models
 {
-    abstract public class CharacterClassModel : IEntity
+    public class CharacterClassRequest
     {
-
-        public Guid Id { get; set; }
         public string? Name { get; set; }
         public float MoveSpeed { get; set; }
         public bool CanUseSpell { get; set; } = false;
         public int Level { get; set; }
         public int HitPoint { get; set; }
         public float Luck { get; set; }
-
-
-        public CharacterProfileModel? characterProfile { get; set; }
-
     }
 }

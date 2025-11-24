@@ -1,0 +1,6 @@
+@Character.REST_HostAddress = http://localhost:5177
+
+GET {{Character.REST_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
