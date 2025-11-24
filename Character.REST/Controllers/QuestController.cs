@@ -1,5 +1,6 @@
 ﻿using Character.Infrastructure;
 using Character.REST.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using DbQuest = Character.Infrastructure.Models.Quests;
@@ -19,6 +20,7 @@ namespace Character.REST.Controllers
             _questService = questService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quest>>> GetAll()
         {
@@ -32,6 +34,7 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Quest>> GetById(Guid id)
         {
@@ -47,6 +50,8 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] QuestRequest request)
         {
@@ -73,6 +78,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not create quest");
         }
 
+        [Authorize(Roles = "Moderator, Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] QuestRequest request)
         {
@@ -90,6 +96,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not update quest");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

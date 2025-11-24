@@ -1,14 +1,10 @@
 ﻿using Character.Infrastructure.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Character.Infrastructure
 {
-    public class CharacterContext : DbContext
+    public class CharacterContext : IdentityDbContext<UserModel>
     {
         public DbSet<CharacterClassModel> Characters { get; set; }
         public DbSet<Warrior> Warriors { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Character.Infrastructure;
 using Character.REST.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DbMage = Character.Infrastructure.Models.Mage;
 
@@ -17,6 +18,7 @@ namespace Character.REST.Controllers
             _mageService = mageService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mage>>> GetAll()
         {
@@ -34,6 +36,7 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Mage>> GetById(Guid id)
         {
@@ -53,6 +56,7 @@ namespace Character.REST.Controllers
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] MageRequest request)
         {
@@ -84,6 +88,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not create mage");
         }
 
+        [Authorize(Roles = "Moderator, Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] MageRequest request)
         {
@@ -102,6 +107,7 @@ namespace Character.REST.Controllers
             return BadRequest("Could not update mage");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
