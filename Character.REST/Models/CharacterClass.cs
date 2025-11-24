@@ -1,11 +1,7 @@
-﻿using Characters.Common;
-using System;
-
-namespace Character.Infrastructure.Models
+﻿namespace Character.REST.Models
 {
-    abstract public class CharacterClassModel : IEntity
+    public class CharacterClass
     {
-
         public Guid Id { get; set; }
         public string? Name { get; set; }
         public float MoveSpeed { get; set; }
@@ -15,7 +11,6 @@ namespace Character.Infrastructure.Models
         public float Luck { get; set; }
 
 
-        public CharacterProfileModel? characterProfile { get; set; }
 
     }
 }
